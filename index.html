@@ -6,13 +6,30 @@
     const date = new Date();
     const timezone_offset = date.getTimezoneOffset();
 
+    var hours = Math.floor(timezone_offset / 60);
+    var mins = Math.abs(timezone_offset % 60);
+    if (mins.toString().length < 2) {
+        mins = "0" + mins.toString();
+    }
+    if (timezone_offset >= 0) {
+        if (hours.toString().length < 2) {
+            hours = "0" + hours.toString();
+        }
+        var timezone_offset_str = `+${hours}:${mins}`;
+    } else {
+        if (hours.toString().length < 3) {
+            hours = "-0" + Math.abs(hours).toString();
+        }
+        var timezone_offset_str = `${hours}:${mins}`;
+    }
+
     const elem = document.createElement('p');
     elem.innerText = "City: " + timezone_city;
     const target = document.querySelector('h1');
     target.parentNode.insertBefore(elem, target.nextSibling);
 
     const elem2 = document.createElement('p');
-    elem2.innerText = "Hours offset from UTC: " + (timezone_offset >= 0 ? '+' : '') + timezone_offset;
+    elem2.innerText = "Hours offset from UTC: " + timezone_offset_str;
     const target2 = document.querySelector('p');
     target.parentNode.insertBefore(elem2, target2.nextSibling);
 </script>
