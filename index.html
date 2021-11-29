@@ -1,0 +1,20 @@
+<html>
+<body>
+<h1>Your browser's time zone</h1>
+<script type="text/javascript">
+    const timezone_city = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const date = new Date();
+    const timezone_offset = date.getTimezoneOffset();
+
+    const elem = document.createElement('p');
+    elem.innerText = "City: " + timezone_city;
+    const target = document.querySelector('h1');
+    target.parentNode.insertBefore(elem, target.nextSibling);
+
+    const elem2 = document.createElement('p');
+    elem2.innerText = "Hours offset from UTC: " + (timezone_offset >= 0 ? '+' : '') + timezone_offset;
+    const target2 = document.querySelector('p');
+    target.parentNode.insertBefore(elem2, target2.nextSibling);
+</script>
+</body>
+</html>
